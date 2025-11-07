@@ -17,13 +17,13 @@ pipeline {
             }
         }
 
-         stage('ENE test') {
-             agent {
+        stage('ENE test') {
+            agent {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.39.0-noble '
                     reuseNode true
                 }
-             }
+            }
             steps {
                 sh ''' 
                     npm install serve
