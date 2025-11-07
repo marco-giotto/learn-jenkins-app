@@ -29,7 +29,14 @@ pipeline {
                     npm run build
                     npm install serve
                     node_modules/.bin/serve -s build &
-                    sleep 10
+                    for i in {1..30}; do
+                        if curl -s http://localhost:3000 >/dev/null; then
+                            echo "Server is up!"
+                            break
+                        fi
+                        echo "Waiting for server..."
+                        sleep 1
+                    done
                     npx playwright test
                 '''
             }
